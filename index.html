@@ -1,22 +1,244 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>HiWorld</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HiWorld LLC</title>
   <style>
-    body {
-      font-family: Arial;
-      text-align: center;
-      margin-top: 100px;
-      background: #f9f9f9;
+    :root {
+      --bg-1: #f7f7f2;
+      --bg-2: #ecebe2;
+      --text: #1c1c1c;
+      --muted: #5a5a5a;
+
+      /* retro monster-battle style palette */
+      --poke-red: #e53935;
+      --poke-blue: #3b4cca;
+      --poke-yellow: #ffcb05;
+      --poke-gold: #c7a008;
+      --poke-green: #4caf50;
+      --poke-cream: #fff8dc;
+
+      --pixel: 18px;
+      --inner-pixel: 10px;
+      --panel-max: 980px;
     }
-    h1 { font-size: 48px; }
-    p { font-size: 20px; color: #555; }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background: linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 100%);
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      overflow: hidden;
+    }
+
+    body {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+
+    .stage {
+      width: min(94vw, var(--panel-max));
+      position: relative;
+      transform: scale(0.08);
+      transform-origin: center center;
+      opacity: 0;
+      animation: slowExpand 1800ms cubic-bezier(.18,.84,.22,1) forwards;
+    }
+
+    .pixel-frame {
+      position: relative;
+      padding: calc(var(--pixel) * 3);
+      background:
+        linear-gradient(90deg,
+          var(--poke-red) 0 20%,
+          var(--poke-yellow) 20% 40%,
+          var(--poke-blue) 40% 60%,
+          var(--poke-green) 60% 80%,
+          var(--poke-gold) 80% 100%);
+      image-rendering: pixelated;
+      box-shadow:
+        0 0 0 var(--pixel) #ffffff,
+        0 0 0 calc(var(--pixel) * 2) rgba(28,28,28,.08),
+        0 28px 50px rgba(0,0,0,.12);
+      clip-path: polygon(
+        0% var(--pixel), var(--pixel) var(--pixel), var(--pixel) 0%,
+        calc(100% - var(--pixel)) 0%, calc(100% - var(--pixel)) var(--pixel), 100% var(--pixel),
+        100% calc(100% - var(--pixel)), calc(100% - var(--pixel)) calc(100% - var(--pixel)),
+        calc(100% - var(--pixel)) 100%, var(--pixel) 100%, var(--pixel) calc(100% - var(--pixel)), 0% calc(100% - var(--pixel))
+      );
+    }
+
+    .pixel-frame::before {
+      content: "";
+      position: absolute;
+      inset: var(--pixel);
+      background:
+        repeating-linear-gradient(90deg,
+          var(--poke-red) 0 var(--pixel),
+          var(--poke-yellow) var(--pixel) calc(var(--pixel) * 2),
+          var(--poke-blue) calc(var(--pixel) * 2) calc(var(--pixel) * 3),
+          var(--poke-green) calc(var(--pixel) * 3) calc(var(--pixel) * 4),
+          var(--poke-gold) calc(var(--pixel) * 4) calc(var(--pixel) * 5));
+      opacity: .18;
+      pointer-events: none;
+      clip-path: polygon(
+        0% var(--inner-pixel), var(--inner-pixel) var(--inner-pixel), var(--inner-pixel) 0%,
+        calc(100% - var(--inner-pixel)) 0%, calc(100% - var(--inner-pixel)) var(--inner-pixel), 100% var(--inner-pixel),
+        100% calc(100% - var(--inner-pixel)), calc(100% - var(--inner-pixel)) calc(100% - var(--inner-pixel)),
+        calc(100% - var(--inner-pixel)) 100%, var(--inner-pixel) 100%, var(--inner-pixel) calc(100% - var(--inner-pixel)), 0% calc(100% - var(--inner-pixel))
+      );
+    }
+
+    .panel {
+      position: relative;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.96) 0%, rgba(255,252,240,.96) 100%);
+      border: var(--inner-pixel) solid transparent;
+      padding: clamp(2.5rem, 5vw, 5rem) clamp(1.2rem, 4vw, 3rem);
+      text-align: center;
+      clip-path: polygon(
+        0% var(--inner-pixel), var(--inner-pixel) var(--inner-pixel), var(--inner-pixel) 0%,
+        calc(100% - var(--inner-pixel)) 0%, calc(100% - var(--inner-pixel)) var(--inner-pixel), 100% var(--inner-pixel),
+        100% calc(100% - var(--inner-pixel)), calc(100% - var(--inner-pixel)) calc(100% - var(--inner-pixel)),
+        calc(100% - var(--inner-pixel)) 100%, var(--inner-pixel) 100%, var(--inner-pixel) calc(100% - var(--inner-pixel)), 0% calc(100% - var(--inner-pixel))
+      );
+      box-shadow: inset 0 0 0 4px rgba(59,76,202,.08);
+    }
+
+    .mini-bar {
+      width: 180px;
+      max-width: 40vw;
+      height: 18px;
+      margin: 0 auto 28px;
+      background:
+        repeating-linear-gradient(90deg,
+          var(--poke-red) 0 18px,
+          var(--poke-yellow) 18px 36px,
+          var(--poke-blue) 36px 54px,
+          var(--poke-green) 54px 72px,
+          var(--poke-gold) 72px 90px);
+      clip-path: polygon(
+        0 6px, 6px 6px, 6px 0, calc(100% - 6px) 0, calc(100% - 6px) 6px,
+        100% 6px, 100% calc(100% - 6px), calc(100% - 6px) calc(100% - 6px),
+        calc(100% - 6px) 100%, 6px 100%, 6px calc(100% - 6px), 0 calc(100% - 6px)
+      );
+      image-rendering: pixelated;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(3rem, 9vw, 6.8rem);
+      line-height: 0.94;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 900;
+      color: var(--text);
+      text-shadow:
+        3px 3px 0 rgba(255,203,5,.55),
+        6px 6px 0 rgba(59,76,202,.10);
+    }
+
+    .subtitle {
+      margin-top: 1.35rem;
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      text-transform: uppercase;
+      letter-spacing: 0.26em;
+      color: var(--poke-blue);
+      font-weight: 800;
+    }
+
+    .coming {
+      display: inline-block;
+      margin-top: 1.5rem;
+      padding: 0.8rem 1.2rem;
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-weight: 800;
+      color: var(--text);
+      background:
+        repeating-linear-gradient(90deg,
+          var(--poke-cream) 0 16px,
+          #fff2b8 16px 32px);
+      box-shadow:
+        0 0 0 4px var(--poke-blue),
+        8px 8px 0 rgba(229,57,53,.22);
+      clip-path: polygon(
+        0 8px, 8px 8px, 8px 0, calc(100% - 8px) 0, calc(100% - 8px) 8px,
+        100% 8px, 100% calc(100% - 8px), calc(100% - 8px) calc(100% - 8px),
+        calc(100% - 8px) 100%, 8px 100%, 8px calc(100% - 8px), 0 calc(100% - 8px)
+      );
+    }
+
+    .note {
+      margin: 1.5rem auto 0;
+      max-width: 640px;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
+    @keyframes slowExpand {
+      0% {
+        transform: scale(0.08);
+        opacity: 0;
+      }
+      35% {
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    @media (max-width: 640px) {
+      :root {
+        --pixel: 12px;
+        --inner-pixel: 8px;
+      }
+
+      .pixel-frame {
+        padding: calc(var(--pixel) * 2.25);
+      }
+
+      .subtitle {
+        letter-spacing: 0.16em;
+      }
+
+      .coming {
+        letter-spacing: 0.12em;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .stage {
+        animation: none;
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
   </style>
 </head>
 <body>
-  <h1>HiWorld</h1>
-  <p>Fantasy Sports Platform</p>
-  <p>Coming Soon</p>
+  <main class="stage">
+    <section class="pixel-frame">
+      <div class="panel">
+        <div class="mini-bar" aria-hidden="true"></div>
+        <h1>HiWorld LLC</h1>
+        <div class="subtitle">Trading Card Binder Scanner</div>
+        <div class="coming">Coming Soon</div>
+        <div class="subtitle">Fantasy Sports Hub Platform</div>
+        <div class="coming">Coming Soon</div>
+        <p class="note">We Like Fun Stuff, and Making Stuff Fun.</p>
+      </div>
+    </section>
+  </main>
 </body>
 </html>
