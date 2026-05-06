@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HiWorld LLC</title>
+  <title>HiWorld LLC — Mobile Apps for Collectors &amp; Enthusiasts</title>
+  <meta name="description" content="HiWorld LLC builds mobile apps for collectors and enthusiasts. Our flagship app Card Valuer helps Pokemon TCG players instantly scan and price their collections using live market data." />
   <style>
     :root {
       --bg-1: #f7f7f2;
@@ -30,27 +31,72 @@
       margin: 0;
       min-height: 100%;
       background: linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 100%);
+      background-attachment: fixed;
       font-family: Arial, Helvetica, sans-serif;
       color: var(--text);
-      overflow: hidden;
     }
 
-    body {
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      padding: 24px;
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(247,247,242,0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 4px solid transparent;
+      border-image: linear-gradient(90deg,
+        var(--poke-red) 0 20%,
+        var(--poke-yellow) 20% 40%,
+        var(--poke-blue) 40% 60%,
+        var(--poke-green) 60% 80%,
+        var(--poke-gold) 80% 100%) 1;
+    }
+    .nav-inner {
+      max-width: var(--panel-max);
+      margin: 0 auto;
+      padding: 0 clamp(1rem, 4vw, 2rem);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 58px;
+    }
+    .nav-logo {
+      font-size: 1.05rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: clamp(1.2rem, 3vw, 2.4rem);
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .nav-links a {
+      font-size: 0.82rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--muted);
+      text-decoration: none;
+    }
+    .nav-links a:hover { color: var(--poke-blue); }
+
+    /* ── PAGE WRAPPER ── */
+    .page-wrap {
+      max-width: var(--panel-max);
+      margin: 0 auto;
+      padding: clamp(2rem, 5vw, 4rem) clamp(1rem, 4vw, 2rem);
     }
 
-    .stage {
-      width: min(94vw, var(--panel-max));
-      position: relative;
-      transform: scale(0.08);
-      transform-origin: center center;
-      opacity: 0;
-      animation: slowExpand 1800ms cubic-bezier(.18,.84,.22,1) forwards;
+    section {
+      margin-bottom: clamp(3rem, 8vw, 5rem);
     }
 
+    /* ── PIXEL FRAME (same as before) ── */
     .pixel-frame {
       position: relative;
       padding: calc(var(--pixel) * 3);
@@ -111,6 +157,14 @@
       box-shadow: inset 0 0 0 4px rgba(59,76,202,.08);
     }
 
+    /* ── HERO ── */
+    .stage {
+      transform: scale(0.08);
+      transform-origin: center center;
+      opacity: 0;
+      animation: slowExpand 1800ms cubic-bezier(.18,.84,.22,1) forwards;
+    }
+
     .mini-bar {
       width: 180px;
       max-width: 40vw;
@@ -144,101 +198,481 @@
         6px 6px 0 rgba(59,76,202,.10);
     }
 
-    .subtitle {
+    .hero-tagline {
       margin-top: 1.35rem;
-      font-size: clamp(1rem, 2vw, 1.3rem);
+      font-size: clamp(0.85rem, 1.8vw, 1.1rem);
       text-transform: uppercase;
-      letter-spacing: 0.26em;
+      letter-spacing: 0.24em;
       color: var(--poke-blue);
       font-weight: 800;
     }
 
-    .coming {
+    .hero-note {
+      margin: 1.2rem auto 0;
+      max-width: 580px;
+      font-size: 1rem;
+      line-height: 1.65;
+      color: var(--muted);
+    }
+
+    @keyframes slowExpand {
+      0%   { transform: scale(0.08); opacity: 0; }
+      35%  { opacity: 1; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* ── SECTION HEADERS ── */
+    .section-head {
+      text-align: center;
+      margin-bottom: 2.2rem;
+    }
+    .section-head h2 {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin: 0 0 0.5rem;
+      text-shadow: 2px 2px 0 rgba(255,203,5,.4);
+    }
+    .section-head p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      max-width: 540px;
+      margin: 0 auto;
+    }
+
+    /* ── PRODUCTS ── */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+      gap: 2rem;
+    }
+
+    .product-card {
+      position: relative;
+      padding: calc(var(--pixel) * 2);
+      background: linear-gradient(90deg,
+        var(--poke-red) 0 20%,
+        var(--poke-yellow) 20% 40%,
+        var(--poke-blue) 40% 60%,
+        var(--poke-green) 60% 80%,
+        var(--poke-gold) 80% 100%);
+      clip-path: polygon(
+        0% var(--pixel), var(--pixel) var(--pixel), var(--pixel) 0%,
+        calc(100% - var(--pixel)) 0%, calc(100% - var(--pixel)) var(--pixel), 100% var(--pixel),
+        100% calc(100% - var(--pixel)), calc(100% - var(--pixel)) calc(100% - var(--pixel)),
+        calc(100% - var(--pixel)) 100%, var(--pixel) 100%, var(--pixel) calc(100% - var(--pixel)), 0% calc(100% - var(--pixel))
+      );
+      box-shadow: 0 12px 32px rgba(0,0,0,.10);
+    }
+
+    .product-inner {
+      background: linear-gradient(180deg, rgba(255,255,255,.97) 0%, rgba(255,252,240,.97) 100%);
+      padding: 2rem;
+      clip-path: polygon(
+        0% var(--inner-pixel), var(--inner-pixel) var(--inner-pixel), var(--inner-pixel) 0%,
+        calc(100% - var(--inner-pixel)) 0%, calc(100% - var(--inner-pixel)) var(--inner-pixel), 100% var(--inner-pixel),
+        100% calc(100% - var(--inner-pixel)), calc(100% - var(--inner-pixel)) calc(100% - var(--inner-pixel)),
+        calc(100% - var(--inner-pixel)) 100%, var(--inner-pixel) 100%, var(--inner-pixel) calc(100% - var(--inner-pixel)), 0% calc(100% - var(--inner-pixel))
+      );
+    }
+
+    .product-title {
+      font-size: 1.5rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin: 0 0 0.3rem;
+    }
+
+    .product-platform {
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--poke-blue);
+      margin-bottom: 1rem;
+    }
+
+    .product-desc {
+      font-size: 0.95rem;
+      line-height: 1.65;
+      color: var(--muted);
+      margin-bottom: 1.2rem;
+    }
+
+    .feature-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 1.5rem;
+      text-align: left;
+    }
+    .feature-list li {
+      font-size: 0.88rem;
+      padding: 0.32rem 0;
+      color: var(--text);
+      border-bottom: 1px solid rgba(59,76,202,.08);
+    }
+    .feature-list li::before {
+      content: "▸ ";
+      color: var(--poke-red);
+      font-weight: 900;
+    }
+
+    .badge {
       display: inline-block;
-      margin-top: 1.5rem;
-      padding: 0.8rem 1.2rem;
-      font-size: clamp(1rem, 2vw, 1.15rem);
+      padding: 0.55rem 1rem;
+      font-size: 0.8rem;
       text-transform: uppercase;
       letter-spacing: 0.18em;
       font-weight: 800;
       color: var(--text);
-      background:
-        repeating-linear-gradient(90deg,
-          var(--poke-cream) 0 16px,
-          #fff2b8 16px 32px);
-      box-shadow:
-        0 0 0 4px var(--poke-blue),
-        8px 8px 0 rgba(229,57,53,.22);
+      background: repeating-linear-gradient(90deg, var(--poke-cream) 0 16px, #fff2b8 16px 32px);
+      box-shadow: 0 0 0 3px var(--poke-blue), 6px 6px 0 rgba(59,76,202,.18);
+      clip-path: polygon(
+        0 6px, 6px 6px, 6px 0, calc(100% - 6px) 0, calc(100% - 6px) 6px,
+        100% 6px, 100% calc(100% - 6px), calc(100% - 6px) calc(100% - 6px),
+        calc(100% - 6px) 100%, 6px 100%, 6px calc(100% - 6px), 0 calc(100% - 6px)
+      );
+    }
+
+    /* ── ABOUT ── */
+    .about-frame {
+      position: relative;
+      padding: calc(var(--pixel) * 2.5);
+      background: linear-gradient(90deg,
+        var(--poke-blue) 0 20%,
+        var(--poke-red) 20% 40%,
+        var(--poke-gold) 40% 60%,
+        var(--poke-green) 60% 80%,
+        var(--poke-yellow) 80% 100%);
+      clip-path: polygon(
+        0% var(--pixel), var(--pixel) var(--pixel), var(--pixel) 0%,
+        calc(100% - var(--pixel)) 0%, calc(100% - var(--pixel)) var(--pixel), 100% var(--pixel),
+        100% calc(100% - var(--pixel)), calc(100% - var(--pixel)) calc(100% - var(--pixel)),
+        calc(100% - var(--pixel)) 100%, var(--pixel) 100%, var(--pixel) calc(100% - var(--pixel)), 0% calc(100% - var(--pixel))
+      );
+      box-shadow: 0 12px 32px rgba(0,0,0,.10);
+    }
+
+    .about-inner {
+      background: linear-gradient(180deg, rgba(255,255,255,.97) 0%, rgba(255,252,240,.97) 100%);
+      padding: clamp(2rem, 4vw, 3.5rem);
+      clip-path: polygon(
+        0% var(--inner-pixel), var(--inner-pixel) var(--inner-pixel), var(--inner-pixel) 0%,
+        calc(100% - var(--inner-pixel)) 0%, calc(100% - var(--inner-pixel)) var(--inner-pixel), 100% var(--inner-pixel),
+        100% calc(100% - var(--inner-pixel)), calc(100% - var(--inner-pixel)) calc(100% - var(--inner-pixel)),
+        calc(100% - var(--inner-pixel)) 100%, var(--inner-pixel) 100%, var(--inner-pixel) calc(100% - var(--inner-pixel)), 0% calc(100% - var(--inner-pixel))
+      );
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .about-text h3 {
+      font-size: 1.2rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin: 0 0 1rem;
+    }
+
+    .about-text p {
+      font-size: 0.93rem;
+      line-height: 1.7;
+      color: var(--muted);
+      margin: 0 0 0.9rem;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .stat-box {
+      background: var(--poke-cream);
+      padding: 1.2rem;
+      text-align: center;
+      clip-path: polygon(
+        0 6px, 6px 6px, 6px 0, calc(100% - 6px) 0, calc(100% - 6px) 6px,
+        100% 6px, 100% calc(100% - 6px), calc(100% - 6px) calc(100% - 6px),
+        calc(100% - 6px) 100%, 6px 100%, 6px calc(100% - 6px), 0 calc(100% - 6px)
+      );
+      box-shadow: inset 0 0 0 2px rgba(59,76,202,.15);
+    }
+
+    .stat-number {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--poke-red);
+      display: block;
+      line-height: 1.1;
+      margin-bottom: 0.3rem;
+    }
+
+    .stat-label {
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+    }
+
+    /* ── CONTACT ── */
+    .contact-frame {
+      position: relative;
+      padding: calc(var(--pixel) * 2.5);
+      background: linear-gradient(90deg,
+        var(--poke-red) 0 20%,
+        var(--poke-yellow) 20% 40%,
+        var(--poke-blue) 40% 60%,
+        var(--poke-green) 60% 80%,
+        var(--poke-gold) 80% 100%);
+      clip-path: polygon(
+        0% var(--pixel), var(--pixel) var(--pixel), var(--pixel) 0%,
+        calc(100% - var(--pixel)) 0%, calc(100% - var(--pixel)) var(--pixel), 100% var(--pixel),
+        100% calc(100% - var(--pixel)), calc(100% - var(--pixel)) calc(100% - var(--pixel)),
+        calc(100% - var(--pixel)) 100%, var(--pixel) 100%, var(--pixel) calc(100% - var(--pixel)), 0% calc(100% - var(--pixel))
+      );
+      box-shadow: 0 12px 32px rgba(0,0,0,.10);
+    }
+
+    .contact-inner {
+      background: linear-gradient(180deg, rgba(255,255,255,.97) 0%, rgba(255,252,240,.97) 100%);
+      padding: clamp(2rem, 4vw, 3.5rem);
+      text-align: center;
+      clip-path: polygon(
+        0% var(--inner-pixel), var(--inner-pixel) var(--inner-pixel), var(--inner-pixel) 0%,
+        calc(100% - var(--inner-pixel)) 0%, calc(100% - var(--inner-pixel)) var(--inner-pixel), 100% var(--inner-pixel),
+        100% calc(100% - var(--inner-pixel)), calc(100% - var(--inner-pixel)) calc(100% - var(--inner-pixel)),
+        calc(100% - var(--inner-pixel)) 100%, var(--inner-pixel) 100%, var(--inner-pixel) calc(100% - var(--inner-pixel)), 0% calc(100% - var(--inner-pixel))
+      );
+    }
+
+    .contact-inner h3 {
+      font-size: 1.2rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin: 0 0 0.6rem;
+    }
+
+    .contact-inner p {
+      color: var(--muted);
+      font-size: 0.93rem;
+      line-height: 1.6;
+      margin: 0 0 1.5rem;
+    }
+
+    .contact-email-link {
+      display: inline-block;
+      padding: 0.85rem 2rem;
+      font-size: 1rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      color: var(--poke-blue);
+      background: var(--poke-cream);
+      text-decoration: none;
       clip-path: polygon(
         0 8px, 8px 8px, 8px 0, calc(100% - 8px) 0, calc(100% - 8px) 8px,
         100% 8px, 100% calc(100% - 8px), calc(100% - 8px) calc(100% - 8px),
         calc(100% - 8px) 100%, 8px 100%, 8px calc(100% - 8px), 0 calc(100% - 8px)
       );
+      box-shadow: 0 0 0 3px var(--poke-blue), 6px 6px 0 rgba(59,76,202,.2);
     }
 
-    .note {
-      margin: 1.5rem auto 0;
-      max-width: 640px;
-      font-size: 1rem;
-      line-height: 1.6;
+    /* ── FOOTER ── */
+    footer {
+      border-top: 4px solid transparent;
+      border-image: linear-gradient(90deg,
+        var(--poke-red) 0 20%,
+        var(--poke-yellow) 20% 40%,
+        var(--poke-blue) 40% 60%,
+        var(--poke-green) 60% 80%,
+        var(--poke-gold) 80% 100%) 1;
+      padding: 2rem clamp(1rem, 4vw, 2rem);
+      text-align: center;
+    }
+
+    .footer-inner {
+      max-width: var(--panel-max);
+      margin: 0 auto;
+    }
+
+    footer p {
+      font-size: 0.8rem;
       color: var(--muted);
+      margin: 0.35rem 0;
     }
 
-    @keyframes slowExpand {
-      0% {
-        transform: scale(0.08);
-        opacity: 0;
-      }
-      35% {
-        opacity: 1;
-      }
-      100% {
-        transform: scale(1);
-        opacity: 1;
-      }
+    footer a {
+      color: var(--poke-blue);
+      text-decoration: none;
+      font-weight: 800;
     }
 
+    /* ── RESPONSIVE ── */
     @media (max-width: 640px) {
       :root {
         --pixel: 12px;
         --inner-pixel: 8px;
       }
-
-      .pixel-frame {
-        padding: calc(var(--pixel) * 2.25);
-      }
-
-      .subtitle {
-        letter-spacing: 0.16em;
-      }
-
-      .coming {
-        letter-spacing: 0.12em;
-      }
+      .pixel-frame { padding: calc(var(--pixel) * 2.25); }
+      .hero-tagline { letter-spacing: 0.16em; }
+      .about-inner { grid-template-columns: 1fr; gap: 1.5rem; }
+      .nav-links a { font-size: 0.76rem; letter-spacing: 0.1em; }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .stage {
-        animation: none;
-        transform: scale(1);
-        opacity: 1;
-      }
+      .stage { animation: none; transform: scale(1); opacity: 1; }
     }
   </style>
 </head>
 <body>
-  <main class="stage">
-    <section class="pixel-frame">
-      <div class="panel">
-        <div class="mini-bar" aria-hidden="true"></div>
-        <h1>HiWorld LLC</h1>
-        <div class="subtitle">Trading Card Binder Scanner</div>
-        <div class="coming">Coming Soon</div>
-        <div class="subtitle">Fantasy Sports Hub Platform</div>
-        <div class="coming">Coming Soon</div>
-        <p class="note">We Like Fun Stuff, and Making Stuff Fun.</p>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#home" class="nav-logo">HiWorld LLC</a>
+      <ul class="nav-links">
+        <li><a href="#products">Products</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="page-wrap">
+
+    <!-- HERO -->
+    <section id="home">
+      <div class="stage">
+        <div class="pixel-frame">
+          <div class="panel">
+            <div class="mini-bar" aria-hidden="true"></div>
+            <h1>HiWorld LLC</h1>
+            <p class="hero-tagline">Mobile Apps for Collectors &amp; Enthusiasts</p>
+            <p class="hero-note">We build fast, focused apps for hobbyists who take their hobby seriously. Based in the United States.</p>
+          </div>
+        </div>
       </div>
     </section>
-  </main>
+
+    <!-- PRODUCTS -->
+    <section id="products">
+      <div class="section-head">
+        <h2>Our Products</h2>
+        <p>Purpose-built apps with real market data, built for real collectors.</p>
+      </div>
+      <div class="products-grid">
+
+        <div class="product-card">
+          <div class="product-inner">
+            <div class="product-title">Card Valuer</div>
+            <div class="product-platform">iOS App &nbsp;·&nbsp; Pokemon TCG</div>
+            <p class="product-desc">
+              Instantly scan and price Pokemon Trading Card Game cards and graded slabs using your phone camera. Built for dealers, collectors, and anyone sorting bulk inventory at speed — at trade shows, card shops, or at home.
+            </p>
+            <ul class="feature-list">
+              <li>Real-time camera scanning with on-device OCR</li>
+              <li>Live market pricing from TCGPlayer &amp; eBay data</li>
+              <li>PSA, CGC, BGS, and SGC graded slab support</li>
+              <li>7-day price trend indicators per card</li>
+              <li>Session management with CSV export</li>
+              <li>Scanning works offline — no internet required for OCR</li>
+              <li>Collection history and aggregate stats</li>
+            </ul>
+            <span class="badge">Launching on the App Store</span>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-inner">
+            <div class="product-title">Fantasy Sports Hub</div>
+            <div class="product-platform">Platform &nbsp;·&nbsp; Fantasy Sports</div>
+            <p class="product-desc">
+              A dedicated platform for fantasy sports enthusiasts — streamlined tools for managing leagues, analyzing players, and making data-driven lineup decisions across multiple sports.
+            </p>
+            <ul class="feature-list">
+              <li>Multi-league management dashboard</li>
+              <li>Player performance analytics</li>
+              <li>Real-time scoring and roster updates</li>
+              <li>Trade analyzer and waiver wire tools</li>
+              <li>Cross-sport support (NFL, NBA, MLB)</li>
+            </ul>
+            <span class="badge">In Development</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="section-head">
+        <h2>About HiWorld</h2>
+      </div>
+      <div class="about-frame">
+        <div class="about-inner">
+          <div class="about-text">
+            <h3>Who We Are</h3>
+            <p>HiWorld LLC is a US-based mobile software company focused on building apps for collectors, hobbyists, and sports enthusiasts. We believe the best tools are fast, focused, and purpose-built for the community using them.</p>
+            <p>Our flagship product, Card Valuer, is an iOS app designed from the ground up for Pokemon TCG collectors and dealers — combining on-device machine learning with live market data to deliver instant, accurate card valuations from a phone camera.</p>
+            <p>HiWorld LLC is incorporated in the United States and operates as a software development and publishing company. We design, build, and maintain our own apps.</p>
+          </div>
+          <div class="about-stats">
+            <div class="stat-box">
+              <span class="stat-number">2</span>
+              <span class="stat-label">Apps in Pipeline</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-number">iOS</span>
+              <span class="stat-label">Primary Platform</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-number">US</span>
+              <span class="stat-label">Incorporated</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-number">LLC</span>
+              <span class="stat-label">Entity Type</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="section-head">
+        <h2>Contact</h2>
+        <p>Questions about our products, press inquiries, or partnership opportunities.</p>
+      </div>
+      <div class="contact-frame">
+        <div class="contact-inner">
+          <h3>Get in Touch</h3>
+          <p>We're a small team and respond to every message personally.</p>
+          <a href="mailto:tom@hiworldllc.com" class="contact-email-link">tom@hiworldllc.com</a>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /page-wrap -->
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <p>&copy; 2026 HiWorld LLC. All rights reserved.</p>
+      <p>
+        <a href="/privacy.html">Privacy Policy</a>
+        &nbsp;&middot;&nbsp;
+        <a href="mailto:tom@hiworldllc.com">tom@hiworldllc.com</a>
+      </p>
+    </div>
+  </footer>
+
 </body>
 </html>

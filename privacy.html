@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — Card Valuer &middot; HiWorld LLC</title>
+  <style>
+    :root {
+      --bg-1: #f7f7f2;
+      --bg-2: #ecebe2;
+      --text: #1c1c1c;
+      --muted: #5a5a5a;
+      --poke-red: #e53935;
+      --poke-blue: #3b4cca;
+      --poke-yellow: #ffcb05;
+      --poke-gold: #c7a008;
+      --poke-green: #4caf50;
+      --poke-cream: #fff8dc;
+      --pixel: 18px;
+      --inner-pixel: 10px;
+      --panel-max: 780px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background: linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 100%);
+      background-attachment: fixed;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(247,247,242,0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 4px solid transparent;
+      border-image: linear-gradient(90deg,
+        var(--poke-red) 0 20%,
+        var(--poke-yellow) 20% 40%,
+        var(--poke-blue) 40% 60%,
+        var(--poke-green) 60% 80%,
+        var(--poke-gold) 80% 100%) 1;
+    }
+    .nav-inner {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 clamp(1rem, 4vw, 2rem);
+      display: flex;
+      align-items: center;
+      height: 58px;
+    }
+    .nav-logo {
+      font-size: 1.05rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .nav-logo span {
+      font-weight: 400;
+      color: var(--muted);
+      margin-left: 0.5rem;
+      font-size: 0.85rem;
+      text-transform: none;
+      letter-spacing: 0.05em;
+    }
+
+    .page-wrap {
+      max-width: var(--panel-max);
+      margin: 0 auto;
+      padding: clamp(2rem, 5vw, 4rem) clamp(1rem, 4vw, 2rem);
+    }
+
+    .doc-frame {
+      position: relative;
+      padding: calc(var(--pixel) * 2.5);
+      background: linear-gradient(90deg,
+        var(--poke-red) 0 20%,
+        var(--poke-yellow) 20% 40%,
+        var(--poke-blue) 40% 60%,
+        var(--poke-green) 60% 80%,
+        var(--poke-gold) 80% 100%);
+      clip-path: polygon(
+        0% var(--pixel), var(--pixel) var(--pixel), var(--pixel) 0%,
+        calc(100% - var(--pixel)) 0%, calc(100% - var(--pixel)) var(--pixel), 100% var(--pixel),
+        100% calc(100% - var(--pixel)), calc(100% - var(--pixel)) calc(100% - var(--pixel)),
+        calc(100% - var(--pixel)) 100%, var(--pixel) 100%, var(--pixel) calc(100% - var(--pixel)), 0% calc(100% - var(--pixel))
+      );
+      box-shadow: 0 12px 40px rgba(0,0,0,.12);
+    }
+
+    .doc-inner {
+      background: linear-gradient(180deg, rgba(255,255,255,.97) 0%, rgba(255,252,240,.97) 100%);
+      padding: clamp(2rem, 5vw, 3.5rem);
+      clip-path: polygon(
+        0% var(--inner-pixel), var(--inner-pixel) var(--inner-pixel), var(--inner-pixel) 0%,
+        calc(100% - var(--inner-pixel)) 0%, calc(100% - var(--inner-pixel)) var(--inner-pixel), 100% var(--inner-pixel),
+        100% calc(100% - var(--inner-pixel)), calc(100% - var(--inner-pixel)) calc(100% - var(--inner-pixel)),
+        calc(100% - var(--inner-pixel)) 100%, var(--inner-pixel) 100%, var(--inner-pixel) calc(100% - var(--inner-pixel)), 0% calc(100% - var(--inner-pixel))
+      );
+    }
+
+    .doc-title {
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin: 0 0 0.3rem;
+      text-shadow: 2px 2px 0 rgba(255,203,5,.4);
+    }
+
+    .doc-meta {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 2px solid rgba(59,76,202,.1);
+    }
+
+    h2 {
+      font-size: 1rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--poke-blue);
+      margin: 2rem 0 0.7rem;
+    }
+
+    p, li {
+      font-size: 0.93rem;
+      line-height: 1.7;
+      color: var(--muted);
+      margin: 0 0 0.8rem;
+    }
+
+    ul {
+      padding-left: 1.2rem;
+      margin: 0 0 0.8rem;
+    }
+
+    li { margin: 0 0 0.3rem; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0 1.5rem;
+      font-size: 0.88rem;
+    }
+
+    th {
+      background: var(--poke-cream);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 0.78rem;
+      padding: 0.6rem 0.8rem;
+      text-align: left;
+      color: var(--text);
+    }
+
+    td {
+      padding: 0.55rem 0.8rem;
+      border-bottom: 1px solid rgba(59,76,202,.08);
+      color: var(--muted);
+    }
+
+    .contact-block {
+      background: var(--poke-cream);
+      padding: 1.2rem 1.5rem;
+      margin-top: 1rem;
+      clip-path: polygon(
+        0 6px, 6px 6px, 6px 0, calc(100% - 6px) 0, calc(100% - 6px) 6px,
+        100% 6px, 100% calc(100% - 6px), calc(100% - 6px) calc(100% - 6px),
+        calc(100% - 6px) 100%, 6px 100%, 6px calc(100% - 6px), 0 calc(100% - 6px)
+      );
+      box-shadow: inset 0 0 0 2px rgba(59,76,202,.15);
+    }
+
+    .contact-block p { margin: 0.2rem 0; }
+
+    a { color: var(--poke-blue); font-weight: 800; }
+
+    footer {
+      border-top: 4px solid transparent;
+      border-image: linear-gradient(90deg,
+        var(--poke-red) 0 20%,
+        var(--poke-yellow) 20% 40%,
+        var(--poke-blue) 40% 60%,
+        var(--poke-green) 60% 80%,
+        var(--poke-gold) 80% 100%) 1;
+      padding: 2rem clamp(1rem, 4vw, 2rem);
+      text-align: center;
+    }
+    footer p { font-size: 0.8rem; color: var(--muted); margin: 0.3rem 0; }
+    footer a { color: var(--poke-blue); text-decoration: none; font-weight: 800; font-size: 0.8rem; }
+
+    @media (max-width: 640px) {
+      :root { --pixel: 12px; --inner-pixel: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">HiWorld LLC <span>/ Privacy Policy</span></a>
+    </div>
+  </nav>
+
+  <div class="page-wrap">
+    <div class="doc-frame">
+      <div class="doc-inner">
+
+        <div class="doc-title">Privacy Policy</div>
+        <div class="doc-meta">
+          Card Valuer &nbsp;&middot;&nbsp; Last updated: April 27, 2026 &nbsp;&middot;&nbsp; Developer: HiWorld LLC
+        </div>
+
+        <h2>Overview</h2>
+        <p>Card Valuer is a Pokemon TCG card scanning and pricing app for iOS. This policy explains what data we access, how it is used, and what we do not do with it.</p>
+
+        <h2>Data We Access</h2>
+
+        <p><strong>Camera</strong><br>
+        Card Valuer requires camera access to scan Pokemon TCG cards and graded slab barcodes. Camera frames are processed entirely on your device using Apple Vision (on-device OCR). No camera images or video are transmitted to any server.</p>
+
+        <p><strong>Local Storage</strong><br>
+        Scan sessions, card lists, and collection data are stored locally on your device using iOS secure storage. This data never leaves your device unless you explicitly choose to export it via CSV.</p>
+
+        <h2>Third-Party API Calls</h2>
+        <p>When a card is identified via OCR, the app sends the card name and set number (text only — no images) to the PokeTrace API to retrieve market pricing data. No personal information is included in these requests.</p>
+
+        <table>
+          <thead>
+            <tr><th>Service</th><th>Data Sent</th><th>Purpose</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>PokeTrace (poketrace.com)</td><td>Card name, set number</td><td>Real-time market pricing</td></tr>
+          </tbody>
+        </table>
+
+        <p>We do not use advertising SDKs, analytics platforms, or tracking libraries of any kind.</p>
+
+        <h2>Data We Do Not Collect</h2>
+        <ul>
+          <li>We do not collect your name, email, or any account information</li>
+          <li>We do not collect location data</li>
+          <li>We do not store or transmit camera images</li>
+          <li>We do not sell any data to third parties</li>
+          <li>We do not use third-party analytics (no Firebase Analytics, no Mixpanel, no Amplitude)</li>
+        </ul>
+
+        <h2>Data Retention</h2>
+        <p>All app data (sessions, card lists, collection history) is stored locally on your device. Deleting the app removes all data permanently. We have no copy of your data.</p>
+
+        <h2>Children's Privacy</h2>
+        <p>Card Valuer does not knowingly collect any information from children under 13. The app contains no account creation, no social features, and no data collection of any kind.</p>
+
+        <h2>Changes to This Policy</h2>
+        <p>If this policy changes materially, the updated version will be posted here with a new "Last updated" date.</p>
+
+        <h2>Contact</h2>
+        <p>Questions about this privacy policy:</p>
+        <div class="contact-block">
+          <p><strong>HiWorld LLC</strong></p>
+          <p>Email: <a href="mailto:tom@hiworldllc.com">tom@hiworldllc.com</a></p>
+          <p>Website: <a href="https://hiworldllc.com">hiworldllc.com</a></p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 HiWorld LLC. All rights reserved.</p>
+    <p><a href="/">Home</a> &nbsp;&middot;&nbsp; <a href="mailto:tom@hiworldllc.com">tom@hiworldllc.com</a></p>
+  </footer>
+
+</body>
+</html>
